@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator 4 Status</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>Flashforge Creator 4</h1>
+  <span id="conn-indicator" class="badge unknown">connecting&hellip;</span>
+</header>
+
+<main>
+  <section class="camera-panel">
+    <iframe id="camera" title="Camera stream"></iframe>
+  </section>
+
+  <section class="status-panel">
+    <div class="card">
+      <h2>Machine</h2>
+      <dl id="machine-info" class="kv"></dl>
+    </div>
+
+    <div class="card">
+      <h2>Temperatures</h2>
+      <div id="temps" class="temps"></div>
+    </div>
+
+    <div class="card">
+      <h2>Set temperature</h2>
+      <p class="hint">Sends M104/M140 immediately -- no slicer/print job involved. Each Set button asks you to confirm first.</p>
+      <form id="set-temp-right-form" class="temp-form">
+        <span class="temp-form-label">Right (T0)</span>
+        <input id="set-temp-right-value" type="number" min="0" max="280" step="1" placeholder="°C" required>
+        <button type="submit" class="btn">Set</button>
+      </form>
+      <form id="set-temp-left-form" class="temp-form">
+        <span class="temp-form-label">Left (T1)</span>
+        <input id="set-temp-left-value" type="number" min="0" max="280" step="1" placeholder="°C" required>
+        <button type="submit" class="btn">Set</button>
+      </form>
+      <form id="set-bed-temp-form" class="temp-form">
+        <span class="temp-form-label">Bed</span>
+        <input id="set-bed-temp-value" type="number" min="0" max="130" step="1" placeholder="°C" required>
+        <button type="submit" class="btn">Set</button>
+      </form>
+      <p id="temp-form-result" class="mono"></p>
+    </div>
+
+    <div class="card">
+      <h2>Lights</h2>
+      <button id="led-toggle" class="btn btn-block">&hellip;</button>
+    </div>
+
+    <div class="card">
+      <h2>Print progress</h2>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      <p id="progress-text">&ndash;</p>
+      <dl id="print-status" class="kv"></dl>
+    </div>
+
+    <div class="card">
+      <h2>Position</h2>
+      <p id="position-text" class="mono">&ndash;</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span id="last-updated">&ndash;</span>
+  <span class="disclaimer">Status/camera/temperature/LED confirmed against real hardware. No pause/resume/stop here yet (see PROTOCOL_NOTES.md).</span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

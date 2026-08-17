@@ -1,0 +1,23 @@
+{
+	"type": "process",
+	"name": "0.18mm CONFIRMED (FlashPrint defaults) @Flashforge Creator 4 - OrcaSlicer",
+	"inherits": "fdm_process_common",
+	"from": "User",
+	"instantiation": "true",
+	"layer_height": "0.18",
+	"initial_layer_print_height": "0.18",
+	"wall_loops": "3",
+	"top_shell_layers": "4",
+	"bottom_shell_layers": "3",
+	"sparse_infill_density": "20%",
+	"sparse_infill_pattern": "hexagon",
+	"outer_wall_speed": "50",
+	"inner_wall_speed": "50",
+	"sparse_infill_speed": "50",
+	"travel_speed": "80",
+	"initial_layer_speed": "50",
+	"enable_support": "0",
+	"compatible_printers": [
+		"Flashforge Creator 4 (Right Extruder) - OrcaSlicer"
+	]
+}

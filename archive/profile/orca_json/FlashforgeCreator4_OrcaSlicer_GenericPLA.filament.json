@@ -1,0 +1,20 @@
+{
+	"type": "filament",
+	"name": "Generic PLA @Flashforge Creator 4 - OrcaSlicer",
+	"inherits": "Generic PLA @System",
+	"from": "User",
+	"instantiation": "true",
+	"nozzle_temperature": ["205"],
+	"nozzle_temperature_initial_layer": ["210"],
+	"cool_plate_temp": ["60"],
+	"cool_plate_temp_initial_layer": ["60"],
+	"hot_plate_temp": ["60"],
+	"hot_plate_temp_initial_layer": ["60"],
+	"eng_plate_temp": ["60"],
+	"eng_plate_temp_initial_layer": ["60"],
+	"textured_plate_temp": ["60"],
+	"textured_plate_temp_initial_layer": ["60"],
+	"compatible_printers": [
+		"Flashforge Creator 4 (Right Extruder) - OrcaSlicer"
+	]
+}
