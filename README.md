@@ -28,14 +28,7 @@ hardware-confirmed fact.
   `2.4.0.1` (matching OrcaSlicer 2.4.x) — if your installed version is much
   newer or older, the JSON key set may have drifted; see
   [Troubleshooting](#troubleshooting).
-- Python 3.x on your PATH — confirm with:
-  ```bash
-  python --version
-  ```
-- Pillow (used to build the two embedded preview images):
-  ```bash
-  pip install pillow
-  ```
+- Python 3.x on your PATH, with Pillow installed (see Install step 2 below).
 
 ## Install
 
@@ -48,9 +41,24 @@ silently overwritten.
    "OrcaSlicer" if the link doesn't open the Store app directly). This
    installs and updates through Windows like any other Store app, and needs
    no separate download/installer. Launch it once so its `%APPDATA%\OrcaSlicer\`
-   settings folder gets created before step 3 below.
+   settings folder gets created before step 4 below.
 
-2. **Copy the post-processing script to a stable, personal location.**
+2. **Install Python**, if you don't already have it — get the latest 3.x
+   installer from [python.org/downloads](https://www.python.org/downloads/).
+   On the first setup screen, **check "Add python.exe to PATH"** before
+   clicking Install — the post-processing script and test suite are launched
+   as plain `python` commands, and without this they won't be found. Confirm
+   it worked in a new terminal:
+   ```bash
+   python --version
+   ```
+
+3. **Install Pillow** (used to build the two embedded preview images):
+   ```bash
+   pip install pillow
+   ```
+
+4. **Copy the post-processing script to a stable, personal location.**
    Create `%USERPROFILE%\Documents\OrcaFlashforgeCreator4\` and copy the
    entire `post_processing\` folder from this repo into it, so you end up
    with `Documents\OrcaFlashforgeCreator4\post_processing\flashforge_gx_post.py`
@@ -65,15 +73,15 @@ silently overwritten.
    your own Windows username** before importing (or fix it afterward in
    OrcaSlicer's Process Settings → Others → Post-processing Scripts).
 
-3. **Copy the profile files into OrcaSlicer's user settings folder:**
+5. **Copy the profile files into OrcaSlicer's user settings folder:**
    - `orcaslicer_profiles\machine\*.json` → `%APPDATA%\OrcaSlicer\user\default\machine\`
    - `orcaslicer_profiles\process\*.json` → `%APPDATA%\OrcaSlicer\user\default\process\`
    - `orcaslicer_profiles\filament\*.json` → `%APPDATA%\OrcaSlicer\user\default\filament\`
 
-4. **Fully close OrcaSlicer** (check Task Manager, not just the window) if
+6. **Fully close OrcaSlicer** (check Task Manager, not just the window) if
    it's running, then relaunch it.
 
-5. **Verify the profiles loaded:**
+7. **Verify the profiles loaded:**
    - Printer dropdown: `FlashForge Creator 4 - 0.4mm Nozzle`, `- 0.6mm
      Nozzle`, and `- 0.8mm Nozzle` all appear.
    - Process dropdown (with one of those printers selected): the matching
@@ -82,22 +90,22 @@ silently overwritten.
      @FlashForge Creator 4` appear.
    - **If nothing appears, stop here** and see [Troubleshooting](#troubleshooting).
 
-6. **Test slice.** Load any small test model, pick the printer/process/
+8. **Test slice.** Load any small test model, pick the printer/process/
    filament triple matching your nozzle and material (see
    [Nozzle variants](#nozzle-variants) below), slice. Open the sliced `.gx`
    file (readable as text past the binary header) and confirm the start
    gcode has real numbers in the `M140 S...` / `M104 S...` lines, not
    literal placeholder text like `[first_layer_bed_temperature]`.
 
-7. **Structural validation** (no printer needed):
+9. **Structural validation** (no printer needed):
    ```bash
    python "%USERPROFILE%\Documents\OrcaFlashforgeCreator4\post_processing\validate_gx.py" "path\to\your\sliced.gx"
    ```
    Confirm it prints `OK: structurally valid` and the header values
    (temperatures, layer height, print speed) look sane.
 
-8. **First real print — supervised.** Copy the `.gx` to USB and print from
-   the Creator 4's front panel. Watch the first layer.
+10. **First real print — supervised.** Copy the `.gx` to USB and print from
+    the Creator 4's front panel. Watch the first layer.
 
 ## Live status, camera, and control (control/)
 
@@ -175,7 +183,7 @@ Builds a synthetic OrcaSlicer-style gcode fixture, runs it through
 `post_processing\validate_gx.py` (magic bytes, header field sanity, both
 embedded preview images valid, non-empty gcode body). This proves the
 pipeline is wired together correctly — it **cannot** prove the output
-prints correctly on real hardware, which is what step 8 of Install is for.
+prints correctly on real hardware, which is what step 10 of Install is for.
 
 To inspect any `.gx` file by hand, including the real reference sample this
 bridge was built from:
@@ -213,7 +221,7 @@ files + restarting:**
 - Confirm Pillow is installed (`pip show pillow`).
 - Confirm the `post_process` path in the process JSON matches where you
   actually put `post_processing\` and uses *your* Windows username — see
-  Install step 2.
+  Install step 4.
 - Confirm `flashforge_gx_post.bat` and `flashforge_gx_post.py` are still in
   the same folder together — moving just one breaks the other.
 
@@ -245,7 +253,7 @@ else in this project does, and needs careful supervised testing.
 
 ```
 post_processing/
-  flashforge_gx_post.py        the converter: gcode -> .gx (source copy -- see Install step 2)
+  flashforge_gx_post.py        the converter: gcode -> .gx (source copy -- see Install step 4)
   flashforge_gx_post.bat       Windows launcher wrapper OrcaSlicer actually calls
   validate_gx.py               structural checker for .gx files
 orcaslicer_profiles/
