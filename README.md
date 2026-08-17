@@ -45,13 +45,22 @@ silently overwritten.
 
 2. **Install Python**, if you don't already have it — get the latest 3.x
    installer from [python.org/downloads](https://www.python.org/downloads/).
-   On the first setup screen, **check "Add python.exe to PATH"** before
-   clicking Install — the post-processing script and test suite are launched
-   as plain `python` commands, and without this they won't be found. Confirm
-   it worked in a new terminal:
+   Click the big **"Install Now"** button on the first screen (this installs
+   for your user only, no admin rights needed) — don't go into "Customize
+   installation" and check "Install for all users", which requires admin.
+   **Check "Add python.exe to PATH"** before clicking Install — the
+   post-processing script and test suite are launched as plain `python`
+   commands, and without this they won't be found. Confirm it worked in a
+   new terminal:
    ```bash
    python --version
    ```
+
+   No admin rights are needed for either OrcaSlicer or Python as described
+   above. The one thing neither this guide nor admin rights can work around:
+   if your organization blocks the Microsoft Store or blocks running
+   downloaded installers outright (common on locked-down corporate
+   machines), you'll need an IT exception for those first.
 
 3. **Install Pillow** (used to build the two embedded preview images):
    ```bash
